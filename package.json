@@ -1,0 +1,35 @@
+{
+  "name": "news-scrapper",
+  "version": "1.0.0",
+  "description": "mongo scrapping app for articles from the web",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matttali09/News-Scrapper.git"
+  },
+  "keywords": [
+    "mongodb",
+    "mongoose",
+    "express",
+    "express-handlebars"
+  ],
+  "author": "Matt Taliancich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matttali09/News-Scrapper/issues"
+  },
+  "homepage": "https://github.com/matttali09/News-Scrapper#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "mongojs": "^2.6.0",
+    "mongoose": "^5.4.3",
+    "morgan": "^1.9.1"
+  }
+}
