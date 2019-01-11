@@ -2,12 +2,13 @@
 var express = require("express");
 var exphbs = require("express-handlebars");
 var logger = require("morgan");
-// Require axios and cheerio. This makes the scraping possible
-var axios = require("axios");
-var cheerio = require("cheerio");
 var mongoose = require("mongoose");
 
+// setup express
 var app = express();
+
+// Define our port
+const PORT = process.env.PORT || 3000;
 
 // Set the app up with morgan.
 // morgan is used to log our HTTP Requests. By setting morgan to 'dev'
@@ -40,6 +41,6 @@ routes = require("./routes")
 app.use(routes)
 
 // Listen on port 3000
-app.listen(3030, function () {
-    console.log("App running on port 3030!");
+app.listen(Port, function () {
+    console.log(`App listening on port: ${Port}`);
 });
