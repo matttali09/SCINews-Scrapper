@@ -81,5 +81,5 @@ router.get("/delete/:id", function (req, res) {
     );
 });
 
-// export the router
+// export the router to the index api
 module.exports = router

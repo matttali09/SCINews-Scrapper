@@ -4,14 +4,14 @@ var db = require("../models");
 var scrape = require("../scripts/scrape");
 
 module.exports = {
-  scrapeHeadlines: function(req, res) {
-    // scrape the NYT
+  scrapeHeadlines: function (req, res) {
+    // scrape the SCINews website
     return scrape()
-      .then(function(articles) {
-        // then insert articles into the db
+      .then(function (articles) {
+        // create a headlines db and store it in the collection of articles
         return db.Headline.create(articles);
       })
-      .then(function(dbHeadline) {
+      .then(function (dbHeadline) {
         if (dbHeadline.length === 0) {
           res.json({
             message: "No new articles today. Check back tomorrow!"
@@ -24,8 +24,8 @@ module.exports = {
           });
         }
       })
-      .catch(function(err) {
-        // This query won't insert articles with duplicate headlines, but it will error after inserting the others
+      .catch(function (err) {
+        // This will occur after inserting the others or if there is an error
         res.json({
           message: "Scrape complete!!"
         });

@@ -1,3 +1,4 @@
+// require router to and use each of the other routers passed in the api exports
 var router = require("express").Router();
 var fetchRoutes = require("./fetch");
 var noteRoutes = require("./notes");
