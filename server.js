@@ -1,46 +1,37 @@
-// Dependencies
+// Require our dependencies
 var express = require("express");
-var exphbs = require("express-handlebars");
-var logger = require("morgan");
 var mongoose = require("mongoose");
+var exphbs = require("express-handlebars");
 
-// setup express
+// Set up our port to be either the host's designated port, or 3000
+var PORT = process.env.PORT || 3000;
+
+// Instantiate our Express App
 var app = express();
 
-// Define our port
-const PORT = process.env.PORT || 3000;
-
-// Set the app up with morgan.
-// morgan is used to log our HTTP Requests. By setting morgan to 'dev'
-// the :status token will be colored red for server error codes,
-// yellow for client error codes, cyan for redirection codes,
-// and uncolored for all other codes.
-app.use(logger("dev"));
+// Require our routes
+var routes = require("./routes");
 
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 // Make public a static folder
 app.use(express.static("public"));
 
-// set up handlebars with default layout main
+// Connect Handlebars to our Express app
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// mongo connection for dev and prod
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+// Have every request go through our route middleware
+app.use(routes);
 
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+// Connect to the Mongo DB
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
-// Routes
-// =========================================================================================
-
-// require the html route and pass in the express parameter and then use them
-routes = require("./routes")
-app.use(routes)
-
-// Listen on port 3000
-app.listen(Port, function () {
-    console.log(`App listening on port: ${Port}`);
+// Listen on the port
+app.listen(PORT, function() {
+  console.log("Listening on port: " + PORT);
 });

@@ -1,8 +1,12 @@
 var router = require("express").Router();
-var headlineRoutes = require("./headlines.js");
-var noteRoutes = require("./notes.js");
+var fetchRoutes = require("./fetch");
+var noteRoutes = require("./notes");
+var headlineRoutes = require("./headlines");
+var clearRoutes = require("./clear");
 
-router.use("/saveHeadline", headlineRoutes);
-
+router.use("/fetch", fetchRoutes);
+router.use("/notes", noteRoutes);
+router.use("/headlines", headlineRoutes);
+router.use("/clear", clearRoutes);
 
 module.exports = router;
